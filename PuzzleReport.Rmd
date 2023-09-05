@@ -1,11 +1,40 @@
+---
+title: "Puzzle Report"
+author: "Steve Tamayo"
+date: "2023-09-05"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(readr)
 library(dplyr)
 library(foreach)
 
+library(wordcloud)
+library(RColorBrewer)
+```
+
+## Where the data came from
+I found a dataset on kaggle called <a href="https://www.kaggle.com/datasets/rtatman/english-word-frequency">"English Word Frequency"</a>. The data set is 6 years old, but it will do for now. 
+
+From the description:
+"This dataset contains the counts of the 333,333 most commonly-used single words on the English language web, as derived from the Google Web Trillion Word Corpus."
+ 
+```{r load and clean data}
 words_raw <- read_csv("unigram_freq.csv")
 words_clean <- na.omit(words_raw)
+```
 
+## What letters I have so far
+I have guessed the letters "e" and "o". The hope was to use vowels to help whittle the options down. 
+
+## Code
+
+### Functions
+These functions help create the regex based on the letters I already used and where they appear (and don't appear) in words.
+```{r}
 rdl_revealed_letters = "[^eo]"
 
 createRegex = function(input_conditions){
@@ -31,10 +60,10 @@ createDFPos = function(input_condition){
   return <-data.frame(subset(words_clean,grepl(createRegex(input_condition),word) & nchar(word, keepNA=FALSE)==length(input_condition)))
 
 }
+```
 
-#rdl_1_rgx = "[o][^oe][^oe][e][^oe][^oe]"
-
-
+### Creating Conditions for each word
+```{r}
 #Riddle Words conditions
 rdl_sen1word1_con = c("o","","","e","","") #6 letters, 1 character = O, 4 character = e
 rdl_sen1word2_con = c("","","o","","","")
@@ -57,7 +86,10 @@ rdl_sen3word5_con = c("","","","o","","","","e")
 rdl_sen3word6_con = c("","","","","o","")
 rdl_sen3word7_con = c("","")
 rdl_sen3word8_con = c("","o","")
+```
 
+### Creating data frames for each word
+```{r}
 df_sen1word1 <- createDFPos(rdl_sen1word1_con)
 df_sen1word2 <- createDFPos(rdl_sen1word2_con)
 df_sen1word3 <- createDFPos(rdl_sen1word3_con)
@@ -79,47 +111,17 @@ df_sen3word5 <- createDFPos(rdl_sen3word5_con)
 df_sen3word6 <- createDFPos(rdl_sen3word6_con)
 df_sen3word7 <- createDFPos(rdl_sen3word7_con)
 df_sen3word8 <- createDFPos(rdl_sen3word8_con)
+```
 
-df_sec1_top20 <- data.frame(first = df_sen1word1$word[1:20],
-                            second = df_sen1word2$word[1:20],
-                            third = df_sen1word3$word[1:20],
-                            fourth = df_sen1word4$word[1:20],
-                            fifth = df_sen1word5$word[1:20],
-                            sixth = df_sen1word6$word[1:20],
-                            seventh = df_sen1word7$word[1:20]
-                            )
+## Word Clouds
+I hope that word clouds would help me visually see what words might go together.
 
-
-df_sec2_top20 <- data.frame(first = df_sen2word1$word[1:20],
-                            second = df_sen2word2$word[1:20],
-                            third = df_sen2word3$word[1:20],
-                            fourth = df_sen2word4$word[1:20]
-                            )
-
-
-
-df_sec3_top20 <- data.frame(first = df_sen3word1$word[1:20],
-                            second = df_sen3word2$word[1:20],
-                            third = df_sen3word3$word[1:20],
-                            fourth = df_sen3word4$word[1:20],
-                            fifth = df_sen3word5$word[1:20],
-                            sixth = df_sen3word6$word[1:20],
-                            seventh = df_sen3word7$word[1:20],
-                            eighth = df_sen3word8$word[1:20]
-)
-
-#Using word clouds
-#templated from https://towardsdatascience.com/create-a-word-cloud-with-r-bde3e7422e8a
-install.packages("wordcloud")
-library(wordcloud)
-install.packages("RColorBrewer")
-library(RColorBrewer)
+```{r, echo=FALSE}
 
 set.seed(1234) # for reproducibility 
 
-#par(mfrow=c(1,1))
 
-wordcloud(words = df_sen1word1$word, freq = df_sen1word1$count, min.freq = 34664,
+wordcloud(words = df_sen1word1$word, freq = df_sen1word1$count, min.freq = 100,
           max.words=200, random.order=FALSE, rot.per=0.35,
           colors=brewer.pal(8, "Dark2"))
 
@@ -127,7 +129,7 @@ wordcloud(words = df_sen1word2$word, freq = df_sen1word2$count, min.freq = 10000
           max.words=200, random.order=FALSE, rot.per=0.35,
           colors=brewer.pal(8, "Dark2"))
 
-wordcloud(words = df_sen1word3$word, freq = df_sen1word3$count, min.freq = 566617666,
+wordcloud(words = df_sen1word3$word, freq = df_sen1word3$count, min.freq = 100,
           max.words=200, random.order=FALSE, rot.per=0.35,
           colors=brewer.pal(8, "Dark2"))
 
@@ -141,7 +143,7 @@ wordcloud(words = df_sen1word5$word, freq = df_sen1word5$count, min.freq = 100,
           colors=brewer.pal(8, "Dark2"),
           scale=c(5,0.25) )
 
-wordcloud(words = df_sen1word6$word, freq = df_sen1word6$count, min.freq = 576436203,
+wordcloud(words = df_sen1word6$word, freq = df_sen1word6$count, min.freq = 100,
           max.words=200, random.order=FALSE, rot.per=0.35,
           colors=brewer.pal(8, "Dark2"),
           scale=c(5,0.25) )
@@ -150,4 +152,7 @@ wordcloud(words = df_sen1word7$word, freq = df_sen1word7$count, min.freq = 100,
           max.words=200, random.order=FALSE, rot.per=0.35,
           colors=brewer.pal(8, "Dark2"),
           scale=c(5,0.25) )
+
+
+```
 
