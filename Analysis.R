@@ -2,6 +2,7 @@ library(tidyverse)
 library(readr)
 library(dplyr)
 library(foreach)
+library(stringr)
 
 words_raw <- read_csv("unigram_freq.csv")
 words_clean <- na.omit(words_raw)
@@ -151,3 +152,81 @@ wordcloud(words = df_sen1word7$word, freq = df_sen1word7$count, min.freq = 100,
           colors=brewer.pal(8, "Dark2"),
           scale=c(5,0.25) )
 
+numA = 0
+numB = 0
+numC = 0
+numD = 0
+numE = 0
+numF = 0
+numG = 0
+numH = 0
+numI = 0
+numJ = 0
+numK = 0
+numL = 0
+numM = 0
+numN = 0
+numO = 0
+numP = 0
+numQ = 0
+numR = 0
+numS = 0
+numT = 0
+numU = 0
+numV = 0
+numW = 0
+numX = 0
+numY = 0
+numZ = 0
+
+lettersC <- c("a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z")
+base_freqC <- replicate(26, 0)
+
+determineLetterWeight <- function (inp_letter, inp_word, inp_weight){
+  tmp_count <- str_count(inp_word,inp_letter)
+  return <- tmp_count * inp_weight
+}
+
+df_sen1_word1_freqC <- base_freqC
+
+determineSenWord <- function(inp_dfword,inp_wordfreqC){
+  for (row in 1:nrow(inp_dfword)){
+    for (i in 1:26) {
+      tmp_freqC <- determineLetterWeight(lettersC[i],inp_dfword$word[row],inp_dfword$count[row])
+      inc(inp_wordfreqC[i]) <- tmp_freqC
+    }
+  }
+}
+
+
+test1 <- determineLetterWeight("f",df_sen1word1$word[1],df_sen1word1$count[1])
+
+df_sen1word1alphabet <-data.frame("word" = df_sen1word1$word,
+                                  "count" = df_sen1word1$count,
+                                  "a" = determineLetterWeight("a",df_sen1word1$word,df_sen1word1$count),
+                                  "b" = determineLetterWeight("b",df_sen1word1$word,df_sen1word1$count),
+                                  "c" = determineLetterWeight("c",df_sen1word1$word,df_sen1word1$count),
+                                  "d" = determineLetterWeight("d",df_sen1word1$word,df_sen1word1$count),
+                                  "e" = determineLetterWeight("e",df_sen1word1$word,df_sen1word1$count),
+                                  "f" = determineLetterWeight("f",df_sen1word1$word,df_sen1word1$count),
+                                  "g" = determineLetterWeight("g",df_sen1word1$word,df_sen1word1$count),
+                                  "h" = determineLetterWeight("h",df_sen1word1$word,df_sen1word1$count),
+                                  "i" = determineLetterWeight("i",df_sen1word1$word,df_sen1word1$count),
+                                  "j" = determineLetterWeight("j",df_sen1word1$word,df_sen1word1$count),
+                                  "k" = determineLetterWeight("k",df_sen1word1$word,df_sen1word1$count),
+                                  "l" = determineLetterWeight("l",df_sen1word1$word,df_sen1word1$count),
+                                  "m" = determineLetterWeight("m",df_sen1word1$word,df_sen1word1$count),
+                                  "n" = determineLetterWeight("n",df_sen1word1$word,df_sen1word1$count),
+                                  "o" = determineLetterWeight("o",df_sen1word1$word,df_sen1word1$count),
+                                  "p" = determineLetterWeight("p",df_sen1word1$word,df_sen1word1$count),
+                                  "q" = determineLetterWeight("q",df_sen1word1$word,df_sen1word1$count),
+                                  "r" = determineLetterWeight("r",df_sen1word1$word,df_sen1word1$count),
+                                  "s" = determineLetterWeight("s",df_sen1word1$word,df_sen1word1$count),
+                                  "t" = determineLetterWeight("t",df_sen1word1$word,df_sen1word1$count),
+                                  "u" = determineLetterWeight("y",df_sen1word1$word,df_sen1word1$count),
+                                  "v" = determineLetterWeight("v",df_sen1word1$word,df_sen1word1$count),
+                                  "w" = determineLetterWeight("w",df_sen1word1$word,df_sen1word1$count),
+                                  "x" = determineLetterWeight("x",df_sen1word1$word,df_sen1word1$count),
+                                  "y" = determineLetterWeight("y",df_sen1word1$word,df_sen1word1$count),
+                                  "z" = determineLetterWeight("z",df_sen1word1$word,df_sen1word1$count)
+                                  )
