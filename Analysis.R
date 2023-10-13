@@ -187,46 +187,136 @@ determineLetterWeight <- function (inp_letter, inp_word, inp_weight){
   return <- tmp_count * inp_weight
 }
 
-df_sen1_word1_freqC <- base_freqC
 
-determineSenWord <- function(inp_dfword,inp_wordfreqC){
-  for (row in 1:nrow(inp_dfword)){
-    for (i in 1:26) {
-      tmp_freqC <- determineLetterWeight(lettersC[i],inp_dfword$word[row],inp_dfword$count[row])
-      inc(inp_wordfreqC[i]) <- tmp_freqC
-    }
-  }
+createAlphabet_df <- function(input_dataframe){
+  return <- data.frame("word" = input_dataframe$word,
+                       "count" = input_dataframe$count,
+                       "a" = determineLetterWeight("a",input_dataframe$word,input_dataframe$count),
+                       "b" = determineLetterWeight("b",input_dataframe$word,input_dataframe$count),
+                       "c" = determineLetterWeight("c",input_dataframe$word,input_dataframe$count),
+                       "d" = determineLetterWeight("d",input_dataframe$word,input_dataframe$count),
+                       "e" = determineLetterWeight("e",input_dataframe$word,input_dataframe$count),
+                       "f" = determineLetterWeight("f",input_dataframe$word,input_dataframe$count),
+                       "g" = determineLetterWeight("g",input_dataframe$word,input_dataframe$count),
+                       "h" = determineLetterWeight("h",input_dataframe$word,input_dataframe$count),
+                       "i" = determineLetterWeight("i",input_dataframe$word,input_dataframe$count),
+                       "j" = determineLetterWeight("j",input_dataframe$word,input_dataframe$count),
+                       "k" = determineLetterWeight("k",input_dataframe$word,input_dataframe$count),
+                       "l" = determineLetterWeight("l",input_dataframe$word,input_dataframe$count),
+                       "m" = determineLetterWeight("m",input_dataframe$word,input_dataframe$count),
+                       "n" = determineLetterWeight("n",input_dataframe$word,input_dataframe$count),
+                       "o" = determineLetterWeight("o",input_dataframe$word,input_dataframe$count),
+                       "p" = determineLetterWeight("p",input_dataframe$word,input_dataframe$count),
+                       "q" = determineLetterWeight("q",input_dataframe$word,input_dataframe$count),
+                       "r" = determineLetterWeight("r",input_dataframe$word,input_dataframe$count),
+                       "s" = determineLetterWeight("s",input_dataframe$word,input_dataframe$count),
+                       "t" = determineLetterWeight("t",input_dataframe$word,input_dataframe$count),
+                       "u" = determineLetterWeight("y",input_dataframe$word,input_dataframe$count),
+                       "v" = determineLetterWeight("v",input_dataframe$word,input_dataframe$count),
+                       "w" = determineLetterWeight("w",input_dataframe$word,input_dataframe$count),
+                       "x" = determineLetterWeight("x",input_dataframe$word,input_dataframe$count),
+                       "y" = determineLetterWeight("y",input_dataframe$word,input_dataframe$count),
+                       "z" = determineLetterWeight("z",input_dataframe$word,input_dataframe$count)
+  )
+  
 }
 
+df_sen1word1alphabet <- createAlphabet_df(df_sen1word1)
+df_sen1word2alphabet <- createAlphabet_df(df_sen1word2)
+df_sen1word3alphabet <- createAlphabet_df(df_sen1word3)
+df_sen1word4alphabet <- createAlphabet_df(df_sen1word4)
+df_sen1word5alphabet <- createAlphabet_df(df_sen1word5)
+df_sen1word6alphabet <- createAlphabet_df(df_sen1word6)
+df_sen1word7alphabet <- createAlphabet_df(df_sen1word7)
 
-test1 <- determineLetterWeight("f",df_sen1word1$word[1],df_sen1word1$count[1])
+df_sen2word1alphabet <- createAlphabet_df(df_sen2word1)
+df_sen2word2alphabet <- createAlphabet_df(df_sen2word2)
+df_sen2word3alphabet <- createAlphabet_df(df_sen2word3)
+df_sen2word4alphabet <- createAlphabet_df(df_sen2word4)
 
-df_sen1word1alphabet <-data.frame("word" = df_sen1word1$word,
-                                  "count" = df_sen1word1$count,
-                                  "a" = determineLetterWeight("a",df_sen1word1$word,df_sen1word1$count),
-                                  "b" = determineLetterWeight("b",df_sen1word1$word,df_sen1word1$count),
-                                  "c" = determineLetterWeight("c",df_sen1word1$word,df_sen1word1$count),
-                                  "d" = determineLetterWeight("d",df_sen1word1$word,df_sen1word1$count),
-                                  "e" = determineLetterWeight("e",df_sen1word1$word,df_sen1word1$count),
-                                  "f" = determineLetterWeight("f",df_sen1word1$word,df_sen1word1$count),
-                                  "g" = determineLetterWeight("g",df_sen1word1$word,df_sen1word1$count),
-                                  "h" = determineLetterWeight("h",df_sen1word1$word,df_sen1word1$count),
-                                  "i" = determineLetterWeight("i",df_sen1word1$word,df_sen1word1$count),
-                                  "j" = determineLetterWeight("j",df_sen1word1$word,df_sen1word1$count),
-                                  "k" = determineLetterWeight("k",df_sen1word1$word,df_sen1word1$count),
-                                  "l" = determineLetterWeight("l",df_sen1word1$word,df_sen1word1$count),
-                                  "m" = determineLetterWeight("m",df_sen1word1$word,df_sen1word1$count),
-                                  "n" = determineLetterWeight("n",df_sen1word1$word,df_sen1word1$count),
-                                  "o" = determineLetterWeight("o",df_sen1word1$word,df_sen1word1$count),
-                                  "p" = determineLetterWeight("p",df_sen1word1$word,df_sen1word1$count),
-                                  "q" = determineLetterWeight("q",df_sen1word1$word,df_sen1word1$count),
-                                  "r" = determineLetterWeight("r",df_sen1word1$word,df_sen1word1$count),
-                                  "s" = determineLetterWeight("s",df_sen1word1$word,df_sen1word1$count),
-                                  "t" = determineLetterWeight("t",df_sen1word1$word,df_sen1word1$count),
-                                  "u" = determineLetterWeight("y",df_sen1word1$word,df_sen1word1$count),
-                                  "v" = determineLetterWeight("v",df_sen1word1$word,df_sen1word1$count),
-                                  "w" = determineLetterWeight("w",df_sen1word1$word,df_sen1word1$count),
-                                  "x" = determineLetterWeight("x",df_sen1word1$word,df_sen1word1$count),
-                                  "y" = determineLetterWeight("y",df_sen1word1$word,df_sen1word1$count),
-                                  "z" = determineLetterWeight("z",df_sen1word1$word,df_sen1word1$count)
-                                  )
+df_sen3word1alphabet <- createAlphabet_df(df_sen3word1)
+df_sen3word2alphabet <- createAlphabet_df(df_sen3word2)
+df_sen3word3alphabet <- createAlphabet_df(df_sen3word3)
+df_sen3word4alphabet <- createAlphabet_df(df_sen3word4)
+df_sen3word5alphabet <- createAlphabet_df(df_sen3word5)
+df_sen3word6alphabet <- createAlphabet_df(df_sen3word6)
+df_sen3word7alphabet <- createAlphabet_df(df_sen3word7)
+df_sen3word8alphabet <- createAlphabet_df(df_sen3word8)
+                             
+sumAlphabet_df <- function(input_dataframe){
+  return <- data.frame(
+    "a" = sum(input_dataframe[3]),
+    "b" = sum(input_dataframe[4]),
+    "c" = sum(input_dataframe[5]),
+    "d" = sum(input_dataframe[6]),
+    "e" = sum(input_dataframe[7]),
+    "f" = sum(input_dataframe[8]),
+    "g" = sum(input_dataframe[9]),
+    "h" = sum(input_dataframe[10]),
+    "i" = sum(input_dataframe[11]),
+    "j" = sum(input_dataframe[12]),
+    "k" = sum(input_dataframe[13]),
+    "l" = sum(input_dataframe[14]),
+    "m" = sum(input_dataframe[15]),
+    "n" = sum(input_dataframe[16]),
+    "o" = sum(input_dataframe[17]),
+    "p" = sum(input_dataframe[18]),
+    "q" = sum(input_dataframe[19]),
+    "r" = sum(input_dataframe[20]),
+    "s" = sum(input_dataframe[21]),
+    "t" = sum(input_dataframe[22]),
+    "u" = sum(input_dataframe[23]),
+    "v" = sum(input_dataframe[24]),
+    "w" = sum(input_dataframe[25]),
+    "x" = sum(input_dataframe[26]),
+    "y" = sum(input_dataframe[27]),
+    "z" = sum(input_dataframe[28])
+  )
+}
+
+df_sen1word1alphabetCount <- sumAlphabet_df(df_sen1word1alphabet)
+df_sen1word2alphabetCount <- sumAlphabet_df(df_sen1word2alphabet)
+df_sen1word3alphabetCount <- sumAlphabet_df(df_sen1word3alphabet)
+df_sen1word4alphabetCount <- sumAlphabet_df(df_sen1word4alphabet)
+df_sen1word5alphabetCount <- sumAlphabet_df(df_sen1word5alphabet)
+df_sen1word6alphabetCount <- sumAlphabet_df(df_sen1word6alphabet)
+df_sen1word7alphabetCount <- sumAlphabet_df(df_sen1word7alphabet)
+
+df_sen2word1alphabetCount <- sumAlphabet_df(df_sen2word1alphabet)
+df_sen2word2alphabetCount <- sumAlphabet_df(df_sen2word2alphabet)
+df_sen2word3alphabetCount <- sumAlphabet_df(df_sen2word3alphabet)
+df_sen2word4alphabetCount <- sumAlphabet_df(df_sen2word4alphabet)
+
+df_sen3word1alphabetCount <- sumAlphabet_df(df_sen3word1alphabet)
+df_sen3word2alphabetCount <- sumAlphabet_df(df_sen3word2alphabet)
+df_sen3word3alphabetCount <- sumAlphabet_df(df_sen3word3alphabet)
+df_sen3word4alphabetCount <- sumAlphabet_df(df_sen3word4alphabet)
+df_sen3word5alphabetCount <- sumAlphabet_df(df_sen3word5alphabet)
+df_sen3word6alphabetCount <- sumAlphabet_df(df_sen3word6alphabet)
+df_sen3word7alphabetCount <- sumAlphabet_df(df_sen3word7alphabet)
+df_sen3word8alphabetCount <- sumAlphabet_df(df_sen3word8alphabet)
+
+df_wordAlphabetCountFull <- df_sen1word1alphabetCount +
+                                df_sen1word2alphabetCount +
+                                df_sen1word3alphabetCount +
+                                df_sen1word4alphabetCount +
+                                df_sen1word5alphabetCount +
+                                df_sen1word6alphabetCount +
+                                df_sen1word7alphabetCount +
+                                df_sen2word1alphabetCount +
+                                df_sen2word2alphabetCount +
+                                df_sen2word3alphabetCount +
+                                df_sen2word4alphabetCount +
+                                df_sen3word1alphabetCount +
+                                df_sen3word2alphabetCount +
+                                df_sen3word3alphabetCount +
+                                df_sen3word4alphabetCount +
+                                df_sen3word5alphabetCount +
+                                df_sen3word6alphabetCount +
+                                df_sen3word7alphabetCount +
+                                df_sen3word8alphabetCount
+                              
+df_wordAlphabetCountFull_Transpose = data.frame(letter = lettersC,
+                                                count = t(df_wordAlphabetCountFull))
+
+df_wordAlphabetCountFull_Transpose[which.max(df_wordAlphabetCountFull_Transpose$count),]
