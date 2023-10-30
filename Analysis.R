@@ -7,7 +7,7 @@ library(stringr)
 words_raw <- read_csv("unigram_freq.csv")
 words_clean <- na.omit(words_raw)
 
-rdl_revealed_letters = "[^eo]"
+rdl_revealed_letters = "[^eoit]"
 
 createRegex = function(input_conditions){
   tmp_word = c(rep("",length(input_conditions)))
@@ -37,27 +37,27 @@ createDFPos = function(input_condition){
 
 
 #Riddle Words conditions
-rdl_sen1word1_con = c("o","","","e","","") #6 letters, 1 character = O, 4 character = e
+rdl_sen1word1_con = c("o","t","","e","","") #6 letters, 1 character = O, 4 character = e
 rdl_sen1word2_con = c("","","o","","","")
 rdl_sen1word3_con = c("","e")
-rdl_sen1word4_con = c("","","","","","")
-rdl_sen1word5_con = c("","","","")
+rdl_sen1word4_con = c("","i","","t","","")
+rdl_sen1word5_con = c("t","","i","")
 rdl_sen1word6_con = c("","")
 rdl_sen1word7_con = c("","e","","")
 
 rdl_sen2word1_con = c("o","")
-rdl_sen2word2_con = c("","o")
+rdl_sen2word2_con = c("t","o")
 rdl_sen2word3_con = c("","","","","")
 rdl_sen2word4_con = c("","","","")
 
 rdl_sen3word1_con = c("","","","o","","","","e")
 rdl_sen3word2_con = c("","e","")
-rdl_sen3word3_con = c("","")
+rdl_sen3word3_con = c("i","")
 rdl_sen3word4_con = c("","o")
 rdl_sen3word5_con = c("","","","o","","","","e")
 rdl_sen3word6_con = c("","","","","o","")
-rdl_sen3word7_con = c("","")
-rdl_sen3word8_con = c("","o","")
+rdl_sen3word7_con = c("i","")
+rdl_sen3word8_con = c("","o","t")
 
 df_sen1word1 <- createDFPos(rdl_sen1word1_con)
 df_sen1word2 <- createDFPos(rdl_sen1word2_con)
@@ -148,6 +148,62 @@ wordcloud(words = df_sen1word6$word, freq = df_sen1word6$count, min.freq = 57643
           scale=c(5,0.25) )
 
 wordcloud(words = df_sen1word7$word, freq = df_sen1word7$count, min.freq = 100,
+          max.words=200, random.order=FALSE, rot.per=0.35,
+          colors=brewer.pal(8, "Dark2"),
+          scale=c(5,0.25) )
+
+wordcloud(words = df_sen2word1$word, freq = df_sen2word1$count, min.freq = 34664,
+          max.words=200, random.order=FALSE, rot.per=0.35,
+          colors=brewer.pal(8, "Dark2"))
+
+
+wordcloud(words = df_sen2word2$word, freq = df_sen2word2$count, min.freq = 34664,
+          max.words=200, random.order=FALSE, rot.per=0.35,
+          colors=brewer.pal(8, "Dark2"))
+
+
+wordcloud(words = df_sen2word3$word, freq = df_sen2word3$count, min.freq = 34664,
+          max.words=200, random.order=FALSE, rot.per=0.35,
+          colors=brewer.pal(8, "Dark2"))
+
+
+wordcloud(words = df_sen2word4$word, freq = df_sen2word4$count, min.freq = 34664,
+          max.words=200, random.order=FALSE, rot.per=0.35,
+          colors=brewer.pal(8, "Dark2"))
+
+wordcloud(words = df_sen3word1$word, freq = df_sen3word1$count, min.freq = 34664,
+          max.words=200, random.order=FALSE, rot.per=0.35,
+          colors=brewer.pal(8, "Dark2"))
+
+wordcloud(words = df_sen3word2$word, freq = df_sen3word2$count, min.freq = 10000,
+          max.words=200, random.order=FALSE, rot.per=0.35,
+          colors=brewer.pal(8, "Dark2"))
+
+wordcloud(words = df_sen3word3$word, freq = df_sen3word3$count, min.freq = 566617666,
+          max.words=200, random.order=FALSE, rot.per=0.35,
+          colors=brewer.pal(8, "Dark2"))
+
+wordcloud(words = df_sen3word4$word, freq = df_sen3word4$count, min.freq = 100,
+          max.words=200, random.order=FALSE, rot.per=0.35,
+          colors=brewer.pal(8, "Dark2"),
+          scale=c(4,0.25) )
+
+wordcloud(words = df_sen3word5$word, freq = df_sen3word5$count, min.freq = 100,
+          max.words=200, random.order=FALSE, rot.per=0.35,
+          colors=brewer.pal(8, "Dark2"),
+          scale=c(5,0.25) )
+
+wordcloud(words = df_sen3word6$word, freq = df_sen3word6$count, min.freq = 576436203,
+          max.words=200, random.order=FALSE, rot.per=0.35,
+          colors=brewer.pal(8, "Dark2"),
+          scale=c(5,0.25) )
+
+wordcloud(words = df_sen3word7$word, freq = df_sen3word7$count, min.freq = 100,
+          max.words=200, random.order=FALSE, rot.per=0.35,
+          colors=brewer.pal(8, "Dark2"),
+          scale=c(5,0.25) )
+
+wordcloud(words = df_sen3word8$word, freq = df_sen3word8$count, min.freq = 100,
           max.words=200, random.order=FALSE, rot.per=0.35,
           colors=brewer.pal(8, "Dark2"),
           scale=c(5,0.25) )
