@@ -40,7 +40,7 @@ createDFPos = function(input_condition){
 rdl_sen1word1_con = c("o","t","","e","","") #6 letters, 1 character = O, 4 character = e
 rdl_sen1word2_con = c("","","o","","","")
 rdl_sen1word3_con = c("","e")
-rdl_sen1word4_con = c("","i","","t","","")
+rdl_sen1word4_con = c("","i","","t","e","")
 rdl_sen1word5_con = c("t","","i","")
 rdl_sen1word6_con = c("","")
 rdl_sen1word7_con = c("","e","","")
